@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "549191529597-dbl6r50d52e3ibcco738pr7frj1p5vc8.apps.googleusercontent.com",
+          "client_id": "549191529597-cd4al5360usc16q3q0c08tojj991ntj2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bns.reddit_clone",
+            "certificate_hash": "2e62b2e92a3cf42dece39805ae69ccca8b2ce760"
+          }
+        },
+        {
+          "client_id": "549191529597-5d279srup766q6ccqtkaid6vgbjpnips.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "549191529597-dbl6r50d52e3ibcco738pr7frj1p5vc8.apps.googleusercontent.com",
+              "client_id": "549191529597-5d279srup766q6ccqtkaid6vgbjpnips.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "549191529597-ngomud76mpvcqu38sjjruamugc1nve2b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bns.redditClone"
+              }
             }
           ]
         }
