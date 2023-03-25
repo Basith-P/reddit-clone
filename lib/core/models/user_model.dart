@@ -8,7 +8,7 @@ class AppUser {
   final String banner;
   final bool isAuthenticated;
   final int karma;
-  final List<String> awards;
+  final List<dynamic> awards;
 
   AppUser({
     required this.uid,
@@ -27,7 +27,7 @@ class AppUser {
     String? banner,
     bool? isAuthenticated,
     int? karma,
-    List<String>? awards,
+    List<dynamic>? awards,
   }) {
     return AppUser(
       uid: uid ?? this.uid,

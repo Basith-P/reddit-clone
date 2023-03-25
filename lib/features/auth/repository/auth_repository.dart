@@ -60,6 +60,8 @@ class AuthRepository {
           awards: [],
         );
         await _usersCollection.doc(user.uid).set(appUser.toMap());
+      } else {
+        appUser = await getUser(user!.uid).first;
       }
       return right(appUser);
     } on FirebaseAuthException catch (e) {
@@ -67,5 +69,10 @@ class AuthRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+
+  Stream<AppUser> getUser(String uid) {
+    return _usersCollection.doc(uid).snapshots().map((snapshot) =>
+        AppUser.fromMap(snapshot.data()! as Map<String, dynamic>));
   }
 }

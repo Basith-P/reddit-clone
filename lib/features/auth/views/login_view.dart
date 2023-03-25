@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/core/constants/image_paths.dart';
 
 import '../../../core/common/sign_in_button.dart';
+import '../../../core/constants/image_paths.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
