@@ -32,6 +32,8 @@ class AuthRepository {
   CollectionReference get _usersCollection =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
+
   FutureEither<AppUser> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -61,7 +63,7 @@ class AuthRepository {
         );
         await _usersCollection.doc(user.uid).set(appUser.toMap());
       } else {
-        appUser = await getUser(user!.uid).first;
+        appUser = await getUserData(user!.uid).first;
       }
       return right(appUser);
     } on FirebaseAuthException catch (e) {
@@ -71,7 +73,7 @@ class AuthRepository {
     }
   }
 
-  Stream<AppUser> getUser(String uid) {
+  Stream<AppUser> getUserData(String uid) {
     return _usersCollection.doc(uid).snapshots().map((snapshot) =>
         AppUser.fromMap(snapshot.data()! as Map<String, dynamic>));
   }
