@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/functions.dart';
 import '../repository/auth_repository.dart';
 
 final authControllerProvider = Provider(
@@ -12,6 +13,7 @@ class AuthController {
       : _authRepository = authRepository;
 
   Future<void> signInWithGoogle() async {
-    await _authRepository.signInWithGoogle();
+    final user = await _authRepository.signInWithGoogle();
+    user.fold((l) => showSnackbar(l.message), (r) => null);
   }
 }

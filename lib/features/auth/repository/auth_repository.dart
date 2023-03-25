@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/constants/firebase_constants.dart';
+import '../../../core/failure.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/providers/firebaes_providers.dart';
+import '../../../core/typedef.dart';
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(
       auth: ref.read(authProvider),
@@ -29,7 +32,7 @@ class AuthRepository {
   CollectionReference get _usersCollection =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
-  Future<User?> signInWithGoogle() async {
+  FutureEither<AppUser> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -43,9 +46,11 @@ class AuthRepository {
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
 
+      final User? user = authResult.user;
+      late AppUser appUser;
+
       if (authResult.additionalUserInfo!.isNewUser) {
-        final User? user = authResult.user;
-        AppUser appUser = AppUser(
+        appUser = AppUser(
           uid: user!.uid,
           displayImage: user.photoURL ?? '',
           displayName: user.displayName ?? '',
@@ -56,10 +61,11 @@ class AuthRepository {
         );
         await _usersCollection.doc(user.uid).set(appUser.toMap());
       }
+      return right(appUser);
+    } on FirebaseAuthException catch (e) {
+      throw e.message!;
     } catch (e) {
-      print(e);
+      return left(Failure(e.toString()));
     }
-
-    return null;
   }
 }

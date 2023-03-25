@@ -23,7 +23,7 @@ class Pallete {
     colorScheme: ColorScheme.dark().copyWith(background: drawerColor),
   );
 
-  static var lightModeAppTheme = ThemeData.light().copyWith(
+  static var lightModeAppTheme = ThemeData.light(useMaterial3: true).copyWith(
     scaffoldBackgroundColor: whiteColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
