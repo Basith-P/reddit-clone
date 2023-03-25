@@ -11,6 +11,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Image.asset(ImagePaths.logo, height: 40),
+          centerTitle: true,
           actions: [
             TextButton(onPressed: () {}, child: const Text('Skip')),
           ],
