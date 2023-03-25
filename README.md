@@ -1,3 +1,3 @@
-# reddit_clone
+# Reddit clone
 
-Using Riverpod and Firebase# reddit-clone
+Using Riverpod and Firebase
